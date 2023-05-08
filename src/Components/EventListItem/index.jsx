@@ -1,7 +1,32 @@
-import { Col, Divider, Row, Typography } from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import { Button, Col, Divider, Row, Typography } from "antd";
+import { RightOutlined,DeleteOutlined } from "@ant-design/icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteEventsById } from "../../Store/slices/eventSlice";
 
-const EventListItem = () => {
+const EventListItem = ({event,onEventClick}) => {
+
+
+     const navigate = useNavigate();
+      const dispatch = useDispatch();
+
+      const displayDate = (date)=>{
+        const splitDate = date.split(",")
+        const dateMonth = splitDate[0].split(" ")
+        return dateMonth;
+      }
+
+      const onDeleteClick=()=>{
+        dispatch(deleteEventsById(event.id))
+        .unwrap()
+        .then(() => {
+          navigate('/')
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
+     
+
   return (
     <Row
       gutter={{
@@ -13,16 +38,20 @@ const EventListItem = () => {
       justify={"center"}
       align={"middle"}
     >
-      <Col span={6}>
-        <Typography.Title level={2}>Date</Typography.Title>
-        <Typography.Text>Month</Typography.Text>
+      <Col span={5}>
+        <Typography.Title level={2}>{displayDate(event.dateTime)[1]}</Typography.Title>
+        <Typography.Text>{displayDate(event.dateTime)[0]}</Typography.Text>
       </Col>
       <Col span={15}>
-        <Typography.Title level={2}>Description</Typography.Title>
-        <Typography.Text>Vanue</Typography.Text>
+        <Typography.Title level={2}>{event.description}</Typography.Title>
+        <Typography.Text>{event.vanue}</Typography.Text>
       </Col>
-      <Col span={3}>
-        <RightOutlined style={{ fontSize: "28px" }} />
+      <Col span={2}>
+        <DeleteOutlined onClick={()=>onDeleteClick()} style={{ fontSize: "28px" }} />
+        {/* <Button onClick={()=>onDeleteClick()} >Delete</Button> */}
+      </Col>
+      <Col span={2}>
+        <RightOutlined onClick={() => onEventClick(event.id)} style={{ fontSize: "28px" }} />
       </Col>
       <Divider />
     </Row>

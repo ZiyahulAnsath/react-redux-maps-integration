@@ -3,6 +3,7 @@ import EventList from './Components/EventList'
 import './App.css';
 import EventCreate from './Components/EventCreate';
 import Error from './Components/Error';
+import EventView from './Components/EventView';
 
 function App() {
   const router = createBrowserRouter([
@@ -13,6 +14,10 @@ function App() {
     },{
       path:'/create',
       element:<EventCreate/>,
+      errorElement:<Error/>
+    },{
+      path:'/view/:id',
+      element:<EventView/>,
       errorElement:<Error/>
     }
   ])

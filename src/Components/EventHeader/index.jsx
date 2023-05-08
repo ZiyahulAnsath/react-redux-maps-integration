@@ -2,11 +2,12 @@ import { Button, Col, Divider, Row, Typography } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const EventHeader = () => {
 
   const navigate = useNavigate();
-
+  const isLoading = useSelector((state)=>state.event.isLoading)
 
   const onBtnClick = ()=>{
     navigate('/create')
@@ -20,7 +21,7 @@ const EventHeader = () => {
         <Typography.Title>EVENT</Typography.Title>
       </Col>
       <Col xs={6}>
-        <Button type="primary" size="large" icon={<PlusCircleOutlined />} onClick={()=>onBtnClick()}>
+        <Button type="primary" size="large" icon={<PlusCircleOutlined />} onClick={()=>onBtnClick()} loading={isLoading}>
           Add New Events
         </Button>
       </Col>
