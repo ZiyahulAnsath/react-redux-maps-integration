@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEventsById } from "../../Store/slices/eventSlice";
-import { Button, Card, Col, Empty, Row, Typography } from "antd";
+import { Button, Card, Col, Empty, Row, Space, Typography } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader/index";
 import MapContainer from "../MapContainer";
 import dayjs from "dayjs";
-import {ClockCircleTwoTone} from '@ant-design/icons'
+import { ClockCircleTwoTone } from "@ant-design/icons";
 
 const EventView = () => {
   const dispatch = useDispatch();
@@ -43,8 +43,11 @@ const EventView = () => {
                     <Typography.Title>{events.description}</Typography.Title>
                     <Typography.Text>{events.vanue}</Typography.Text>
                     <Typography.Title level={3}>
-                    <ClockCircleTwoTone/>
-                      {events.dateTime}
+                      <Space size={"middle"}>
+                        <ClockCircleTwoTone twoToneColor={"#003B4A"} />
+
+                        {events.dateTime}
+                      </Space>
                     </Typography.Title>
                     <MapContainer
                       onMapClick={null}

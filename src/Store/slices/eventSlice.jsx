@@ -22,22 +22,12 @@ export const getAllEvents = createAsyncThunk(
 export const getEventsById = createAsyncThunk(
     'event/getEventsById',
     async(eventId, thunkAPI)=>{
-        const res = await getSingleEventsByIdApi(eventId);
-        thunkAPI.dispatch(updateSelectedEvents(res.data))
-        return res.data;
+        const response = await getSingleEventsByIdApi(eventId);
+        thunkAPI.dispatch(updateSelectedEvents(response.data))
+        return response.data;
     }
 )
 
-
-// export const getPersonById = createAsyncThunk(
-//     'person/getPersonById',
-//     async(personId,thunkAPI) =>{
-//         const response = await getSinglePersonApi(personId)         //returrn get response from the API 
-//         thunkAPI.dispatch(updateSelectedEvents(response.data))          //passing the response to the reducer function including the response
-//         // console.log(response.data);
-//         return response.data
-//     }
-// )
 
 export const saveEvents = createAsyncThunk(
     'event/saveEvents',
@@ -60,16 +50,6 @@ export const deleteEventsById = createAsyncThunk(
     }
 )
 
-
-
-// export const deletedPersonById = createAsyncThunk(
-//     'person/deletedPersonById',
-//     async(personId,thunkAPI)=>{
-//         const response = await deletePersonByIdApi(personId)
-//         thunkAPI.dispatch(getAllPerson())
-//         return response.data
-//     }
-// )
 
 // export const updateEventsById = createAsyncThunk(
 //     'person/updateEventsById',
